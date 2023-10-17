@@ -1,3 +1,4 @@
+let gameOver = false;
 let inputs = [];
 allInputs();
 
@@ -9,9 +10,8 @@ function tictac(className, value) {
 function allInputs() {
     let inputDivs = document.querySelectorAll('.wrapper>div');
     Array.from(inputDivs).forEach(div => {
-        div.addEventListener('click', addItem);
+            div.addEventListener('click', addItem);
     })
-
 }
 
 function display() {
@@ -24,8 +24,8 @@ function display() {
 }
 
 function addItem(e) {
-
-    if(inputs.some(o => o.class == e.target.className)){
+   
+    if (inputs.some(o => o.class == e.target.className) || gameOver) {
         return;
     }
     let input;
@@ -56,43 +56,57 @@ function addItem(e) {
 function calculateWinner(input) {
 
     let winningCombos = [
-        [1,2,3], 
-        [4,5,6],
-        [7,8,9],
-        [1,4,7],
-        [2,5,8],
-        [3,6,9],
-        [1,5,9],
-        [3,5,7]
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+        [1, 4, 7],
+        [2, 5, 8],
+        [3, 6, 9],
+        [1, 5, 9],
+        [3, 5, 7]
     ]
-    
+
     let isEqual = false;
 
     //since we cannot have class name start with digit , so we have class1 to 1 during filter
-    winningCombos = winningCombos.filter(combo => combo.includes(Number(input.class.substring(5,6))));
+    winningCombos = winningCombos.filter(combo => combo.includes(Number(input.class.substring(5, 6))));
 
 
     //I am not using forEach because it does not support break;
 
-    for(let i = 0 ; i < winningCombos.length; i++){
+    for (let i = 0; i < winningCombos.length; i++) {
         isEqual = true;
         let item = winningCombos[i];
-        for(let j = 0 ; j < item.length; j++){
+        for (let j = 0; j < item.length; j++) {
             let div = document.querySelector(`.class${item[j]}`)
             let content = div.textContent;
-            if(!content || content != input.value){
+            if (!content || content != input.value) {
                 isEqual = false;
                 break;
             }
         }
 
-        if(isEqual){
+        if (isEqual) {
+            let message = '';
+            let score = document.querySelector('.score');
+            if (input.value == "x") {
+                let player1Input = document.querySelector('#player1');
+                message = player1Input.value ? player1Input.value : 'Player1';
+            }
+            else {
+                let player2Input = document.querySelector('#player2');
+                message = player2Input.value ? player2Input.value : 'Player2'
+            }
+            message += ' wins!'
+            score.textContent = message;
+            gameOver = true;
+
             break;
         }
     }
-  
+
     return isEqual;
-    
+
 }
 
 
