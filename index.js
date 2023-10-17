@@ -111,6 +111,11 @@ function calculateWinner(input) {
         }
     }
 
+    //if all winning combo is not met
+    if(!isEqual && inputs.length == 9){
+        let winningMessage = document.querySelector('.winningMessage');
+        winningMessage.textContent = `hmm it's a draw then!`;
+    }
     return isEqual;
 
 }
