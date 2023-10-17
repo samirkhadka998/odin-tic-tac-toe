@@ -2,6 +2,9 @@ let gameOver = false;
 let inputs = [];
 allInputs();
 
+var resetBtn = document.querySelector('button');
+resetBtn.addEventListener('click', reset)
+
 function tictac(className, value) {
     this.class = className;
     this.value = value;
@@ -77,8 +80,10 @@ function calculateWinner(input) {
     for (let i = 0; i < winningCombos.length; i++) {
         isEqual = true;
         let item = winningCombos[i];
+        let divs = [];
         for (let j = 0; j < item.length; j++) {
             let div = document.querySelector(`.class${item[j]}`)
+            divs.push(div);
             let content = div.textContent;
             if (!content || content != input.value) {
                 isEqual = false;
@@ -88,7 +93,7 @@ function calculateWinner(input) {
 
         if (isEqual) {
             let message = '';
-            let score = document.querySelector('.score');
+            let winningMessage = document.querySelector('.winningMessage');
             if (input.value == "x") {
                 let player1Input = document.querySelector('#player1');
                 message = player1Input.value ? player1Input.value : 'Player1';
@@ -98,7 +103,8 @@ function calculateWinner(input) {
                 message = player2Input.value ? player2Input.value : 'Player2'
             }
             message += ' wins!'
-            score.textContent = message;
+            winningMessage.textContent = message;
+            colorDivs(divs, '#0000ff');
             gameOver = true;
 
             break;
@@ -109,5 +115,24 @@ function calculateWinner(input) {
 
 }
 
+function reset() {
+    gameOver = false;
+    inputs = [];
+    let winningMessage = document.querySelector('.winningMessage');
+    winningMessage.textContent = '';
+    let inputDivs = document.querySelectorAll('.wrapper>div');
+    inputDivs.forEach(div => {
+        div.textContent = '';
+        div.style.background = '#fff'
+    })
 
-var btn = document.querySelector('button');
+}
+
+function colorDivs(divs, color) {
+    Array.from(divs).forEach(div => {
+        div.style.background = color;
+    })
+}
+
+
+
