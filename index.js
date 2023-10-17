@@ -13,21 +13,14 @@ function tictac(className, value) {
 function allInputs() {
     let inputDivs = document.querySelectorAll('.wrapper>div');
     Array.from(inputDivs).forEach(div => {
-            div.addEventListener('click', addItem);
+        div.addEventListener('click', addItem);
     })
 }
 
-function display() {
-    let message = '';
-    inputs.forEach(o => {
-        message += `{class : ${o.class}, value : ${o.value}},`
-    })
-    document.querySelector('.array').textContent = message;
-    console.table(inputs)
-}
+
 
 function addItem(e) {
-   
+
     if (inputs.some(o => o.class == e.target.className) || gameOver) {
         return;
     }
@@ -53,7 +46,6 @@ function addItem(e) {
     inputs.push(input)
     calculateWinner(input);
 
-    display();
 }
 
 function calculateWinner(input) {
@@ -112,7 +104,7 @@ function calculateWinner(input) {
     }
 
     //if all winning combo is not met
-    if(!isEqual && inputs.length == 9){
+    if (!isEqual && inputs.length == 9) {
         let winningMessage = document.querySelector('.winningMessage');
         winningMessage.textContent = `hmm it's a draw then!`;
     }
