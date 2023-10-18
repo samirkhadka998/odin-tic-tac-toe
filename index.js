@@ -116,7 +116,7 @@ function calculateWinner(input) {
             }
             message += ' wins!'
             winningMessage.textContent = message;
-            colorDivs(divs, '#0000ff');
+            colorDivs(divs);
             gameOver = true;
 
             break;
@@ -153,14 +153,15 @@ function reset() {
     let inputDivs = document.querySelectorAll('.wrapper>div');
     inputDivs.forEach(div => {
         div.textContent = '';
-        div.style.background = '#fff'
+        div.style.background = 'var(--color1)'
+        div.style.border = `1px solid var(--color3)`
     })
 
 }
 
-function colorDivs(divs, color) {
+function colorDivs(divs) {
     Array.from(divs).forEach(div => {
-        div.style.background = color;
+        div.style.border = `3px solid var(--color4)`;  
     })
 }
 
