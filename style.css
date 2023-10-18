@@ -15,7 +15,7 @@
 
 .wrapper {
     display: grid;
-    width: 40%;
+    width: 25%;
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: repeat(3, 150px);
 }
@@ -53,7 +53,7 @@
 .playerDetail {
     display: flex;
     gap: 10px;
-    width: 40%;
+    width: 25%;
 }
 
 button{
