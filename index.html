@@ -8,10 +8,16 @@
 </head>
 <body>
     <div class="container">
-        <div class="score">
+        <div class="playerDetail">
            <input id="player1" type="text" value="Player1">
            <input id="player2" type="text" value="Player2">
         </div>
+        <div class="score">
+            <div class="playeroneScore"></div>
+            <div class="playertwoScore"></div>
+            <div class="draw"></div>
+        </div>
+
         <div class="winningMessage">
 
         </div>
@@ -28,7 +34,8 @@
            
         </div>
         <div class="info">
-            <button>Play Again</button>
+            <button id="playAgain">Play Again</button>
+            <button id="resetScore">Reset Score</button>
         </div>
        
     </div>

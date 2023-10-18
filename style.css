@@ -28,3 +28,8 @@
     justify-content: center;
     align-items: center;
 }
+
+.score {
+    display: flex;
+    gap: 29px;
+}

@@ -1,14 +1,29 @@
 let gameOver = false;
 let inputs = [];
+const scoreTracker = {
+    player1 : 0,
+    player2 : 0,
+    draw : 0
+}
 allInputs();
 
-var resetBtn = document.querySelector('button');
-resetBtn.addEventListener('click', reset)
+var playAgainBtn = document.querySelector('#playAgain');
+playAgainBtn.addEventListener('click', reset)
 
-function tictac(className, value) {
+var scoreReset = document.querySelector('#resetScore');
+scoreReset.addEventListener('click', () => {
+    scoreTracker.player1 = 0;
+    scoreTracker.player2 = 0;
+    scoreTracker.draw = 0;
+    displayScore();
+})
+
+function Tictac(className, value) {
     this.class = className;
     this.value = value;
 }
+
+
 
 function allInputs() {
     let inputDivs = document.querySelectorAll('.wrapper>div');
@@ -27,18 +42,18 @@ function addItem(e) {
     let input;
     if (inputs.length == 0) {
         e.target.textContent = "x";
-        input = new tictac(e.target.className, e.target.textContent)
+        input = new Tictac(e.target.className, e.target.textContent)
     }
     else {
         let lastValue = inputs[inputs.length - 1].value;
         if (lastValue == "x") {
             e.target.textContent = "o";
-            input = new tictac(e.target.className, e.target.textContent)
+            input = new Tictac(e.target.className, e.target.textContent)
 
         }
         else {
             e.target.textContent = "x";
-            input = new tictac(e.target.className, e.target.textContent)
+            input = new Tictac(e.target.className, e.target.textContent)
 
         }
 
@@ -89,10 +104,15 @@ function calculateWinner(input) {
             if (input.value == "x") {
                 let player1Input = document.querySelector('#player1');
                 message = player1Input.value ? player1Input.value : 'Player1';
+                scoreTracker.player1++;
+                displayScore();
             }
             else {
                 let player2Input = document.querySelector('#player2');
                 message = player2Input.value ? player2Input.value : 'Player2'
+                scoreTracker.player2++;
+                displayScore();
+
             }
             message += ' wins!'
             winningMessage.textContent = message;
@@ -107,9 +127,22 @@ function calculateWinner(input) {
     if (!isEqual && inputs.length == 9) {
         let winningMessage = document.querySelector('.winningMessage');
         winningMessage.textContent = `hmm it's a draw then!`;
+        scoreTracker.draw++;
+        displayScore();
     }
     return isEqual;
 
+}
+
+function displayScore(){
+    let playerOne = document.querySelector('.playeroneScore');
+    let playertwo = document.querySelector('.playertwoScore');
+    let draw = document.querySelector('.draw');
+    let player1Input = document.querySelector('#player1');
+    let player2Input = document.querySelector('#player2');
+    playerOne.textContent =  `${player1Input.value} : ${scoreTracker.player1}`;
+    playertwo.textContent = `${player2Input.value} : ${scoreTracker.player2}`;
+    draw.textContent = `Draw : ${scoreTracker.draw}`;
 }
 
 function reset() {
