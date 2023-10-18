@@ -17,7 +17,7 @@
     display: grid;
     width: 40%;
     grid-template-columns: repeat(3,1fr);
-    grid-template-rows: repeat(3, 100px);
+    grid-template-rows: repeat(3, 150px);
 }
 
 .container {
@@ -31,6 +31,7 @@
     color: var(--color2);
     font-size: 1.5rem;
     font-family: 'Roboto Slab', serif;
+    min-width: 100px;
 }
 
 .wrapper>div {
@@ -64,4 +65,31 @@ input {
     padding: 5px 8px;
     width: 50%;
     font-size: 2rem;
+}
+
+@media only screen and (max-width: 600px) {
+   
+    .playerDetail {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        align-items: center;
+    }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .wrapper {
+            display: grid;
+            width: 70%;
+            grid-template-rows: repeat(3, 100px);
+        }
+
+        .score {
+            flex-direction: column;
+            gap: 1px;
+        }
+
 }
